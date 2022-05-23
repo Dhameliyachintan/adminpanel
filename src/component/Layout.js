@@ -22,6 +22,9 @@ import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import AppBlockingIcon from '@mui/icons-material/AppBlocking';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import AddIcCallIcon from '@mui/icons-material/AddIcCall';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 const drawerWidth = 240;
 
@@ -108,8 +111,9 @@ export default function MiniDrawer({children}) {
     {label : 'Home' , icon: <AccessibilityNewIcon/>, to: "/" },
     {label : 'About' , icon: <AccountBalanceWalletIcon/>, to: "/About" },
     {label : 'Blog' , icon: <AppBlockingIcon/>, to: "/Blog" },
-    {label : 'contact' , icon: <AppBlockingIcon/>, to: "/contact" },
-    {label : 'Medicine' , icon: <AppBlockingIcon/>, to: "/Medicine" }
+    {label : 'contact' , icon: <AddBoxIcon/>, to: "/contact" },
+    {label : 'Medicine' , icon: <AddIcCallIcon/>, to: "/Medicine" },
+    {label : 'Table' , icon: <AddIcCallIcon/>, to: "/Table" }
   ]
 
   return (
