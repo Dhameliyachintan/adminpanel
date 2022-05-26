@@ -1,4 +1,3 @@
-// import Dialog  from './Dialog'
 import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -7,37 +6,33 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-// import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
 import { DataGrid } from '@mui/x-data-grid';
+import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import CreateIcon from '@mui/icons-material/Create';
 
 
 export default function Medicine() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState([])
-
-  const handleDelete = (id) => {
-    let localData = JSON.parse(localStorage.getItem('Doctor'));
-    let filterData = localData.filter((d, i) => d.id !== id);
-    localStorage.setItem("Doctor", JSON.stringify(filterData))
-    loadData()
-
-  }
+  const [Update, setUpdate] = useState()
 
   const handleClickOpen = () => {
     setOpen(true);
+    setUpdate()
   };
 
   const handleClose = () => {
     setOpen(false);
+    setUpdate()
+    formik.resetForm();
   };
 
 
-  let Doctor = {
+  let medicine = {
     name: yup.string().required('enter name'),
     price: yup.string().required('please enter price'),
     quantity: yup.string().required('please enter quantity'),
@@ -45,24 +40,46 @@ export default function Medicine() {
   }
 
 
-  let schema = yup.object().shape(Doctor);
+  let schema = yup.object().shape(medicine);
 
   const formik = useFormik({
     initialValues: {
       name: '',
-      price: '',
-      quantity: '',
+      price:'',
+      quantity:'',
       expiry: ''
     },
     validationSchema: schema,
     onSubmit: (value, { resetForm }) => {
-      handleSubmitdata(value)
+      if(Update) {
+        handleupdate(value)
+      } else {
+        handleSubmitdata(value)
+      }
       resetForm();
     }
   })
 
+  const handleupdate = (value) => {
+    let localdata = JSON.parse(localStorage.getItem("medicine"));
+    
+    let udata = localdata.map((l, i) => {
+      if(l.id === value.id) {
+          return value;
+      } else {
+        return l;
+      }
+    })
+    console.log(udata);
+
+    localStorage.setItem("medicine", JSON.stringify(udata))
+    setOpen(false)
+    setUpdate()
+    loadData()
+  }
+
   const handleSubmitdata = (value) => {
-    let localdata = JSON.parse(localStorage.getItem("Doctor"))
+    let localdata = JSON.parse(localStorage.getItem("medicine"));
 
     let data = {
       id: Math.floor(Math.random() * 1000),
@@ -70,10 +87,10 @@ export default function Medicine() {
     }
 
     if (localdata === null) {
-      localStorage.setItem("Doctor", JSON.stringify([data]))
+      localStorage.setItem("medicine", JSON.stringify([data]))
     } else {
       localdata.push(data)
-      localStorage.setItem("Doctor", JSON.stringify(localdata))
+      localStorage.setItem("medicine", JSON.stringify(localdata))
     }
 
     setOpen(false);
@@ -82,23 +99,51 @@ export default function Medicine() {
   }
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
+
     { field: 'name', headerName: 'Name', width: 130 },
     { field: 'price', headerName: ' Price', width: 130 },
     { field: 'quantity', headerName: 'Quantity', width: 130 },
     { field: 'expiry', headerName: 'Expiry', width: 130 },
     {
-      field: 'action', headerName: 'Action', width: 130,
+      field: 'delete', headerName: 'Delete', width: 130,
       renderCell: (params) => (
-        <Button variant="outlined" onClick={() => handleDelete(params.row.id)} startIcon={<DeleteIcon/>}>
-          Delete
-        </Button>
+        <>
+          <IconButton aria-label="delete" onClick={() => handleDelete(params.row.id)}>
+            <DeleteIcon />
+          </IconButton>
+        </>
       )
     },
+    {
+      field: 'edit', headerName: 'Edit', width: 130,
+      renderCell: (params) => (
+        <>
+          <IconButton aria-label="edit" onClick={() => handleEdit(params.row)}>
+            <CreateIcon />
+          </IconButton>
+        </>
+      )
+    }
   ];
 
+  const handleEdit = (data) => {
+    setOpen(true);
+    setUpdate(data);
+    formik.setValues(data);
+    // console.log(data);
+  }
+
+  const handleDelete = (id) => {
+    let localData = JSON.parse(localStorage.getItem("medicine"))
+
+    let filterData = localData.filter((v, i) => v.id !== id);
+
+    localStorage.setItem("medicine", JSON.stringify(filterData));
+    loadData()
+  }
+
   const loadData = () => {
-    let localData = JSON.parse(localStorage.getItem("Doctor"))
+    let localData = JSON.parse(localStorage.getItem("medicine"))
 
     if (localData !== null) {
       setData(localData)
@@ -117,17 +162,21 @@ export default function Medicine() {
     <Box>
       <Container>
         <div>
-          <Button variant="outlined" onClick={handleClickOpen}>
-            Add Medicine
-          </Button>
+          <center>
+            <Button variant="outlined" onClick={() => handleClickOpen()}>
+              Add Medicine
+            </Button>
+          </center>
           <div style={{ height: 400, width: '100%' }}>
             <DataGrid
               rows={data}
               columns={columns}
+
               pageSize={5}
               rowsPerPageOptions={[5]}
               checkboxSelection
             />
+
           </div>
           <Dialog open={open} onClose={handleClose}>
             <DialogTitle>Add Medicine</DialogTitle>
@@ -146,7 +195,9 @@ export default function Medicine() {
                     defaultValue={formik.values.name}
                     helperText={formik.errors.name}
                     error={formik.errors.name ? true : false}
+
                   />
+
                   <TextField
                     margin="dense"
                     id="price"
@@ -184,7 +235,12 @@ export default function Medicine() {
                   />
                   <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button type="submit">Submit</Button>
+                    {
+                      Update ?
+                      <Button type="submit">Update</Button>
+                       :
+                      <Button type="submit">Submit</Button>
+                    }
                   </DialogActions>
                 </DialogContent>
               </Form>

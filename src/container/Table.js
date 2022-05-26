@@ -10,15 +10,17 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { DataGrid } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
+import BrushIcon from '@mui/icons-material/Brush';
 
 
-function Medicine(props) {
+function Table(props) {
     const [open, setOpen] = React.useState(false);
     const [name, setname] = useState('');
     const [price, setprice] = useState('');
     const [quntity, setquntity] = useState('');
     const [expiry, setexpiry] = useState('');
     const [Data, setData] = useState([]);
+    const [Update, setUpdate] = useState([])
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 90 },
@@ -51,28 +53,44 @@ function Medicine(props) {
 
         {
             field: 'action',
-            headerName: 'action',
+            headerName: 'Action',
             sortable: false,
             width: 160,
             renderCell: (params) => (
-                <Button variant="outlined" onClick={() => handleDelete(params.row.id) } startIcon={<DeleteIcon />}>
+                <Button variant="outlined" onClick={() => handleDelete(params.row.id)} startIcon={<DeleteIcon />}>
                     Delete
+                </Button>
+            )
+        },
+        {
+            field: 'edit',
+            headerName: 'Edit',
+            sortable: false,
+            width: 160,
+            renderCell: (params) => (
+                <Button variant="outlined" onClick={() => handleEdit(params.row)} startIcon={<BrushIcon />}>
+                    Edit
                 </Button>
             )
         },
     ];
 
 
-    const handleDelete = (id) =>{
-        let localData = JSON.parse(localStorage.getItem('medicine'));
-        let filterData = localData.filter((v,i) => v.id !== id);
-        localStorage.setItem("medicine",JSON.stringify(filterData))
+    const handleDelete = (id) => {
+        let localData = JSON.parse(localStorage.getItem('Table'));
+        let filterData = localData.filter((v, i) => v.id !== id);
+        localStorage.setItem("Table", JSON.stringify(filterData))
         loadData()
 
     }
+    const handleEdit = (data) => {
+        setOpen(true)
+        setUpdate()
+      }
+
 
     const loadData = () => {
-        let localData = JSON.parse(localStorage.getItem("medicine"))
+        let localData = JSON.parse(localStorage.getItem("Table"))
         console.log("localData", localData);
 
         if (loadData !== null) {
@@ -98,7 +116,7 @@ function Medicine(props) {
 
 
     const handleSubmit = () => {
-        let localData = JSON.parse(localStorage.getItem("medicine"));
+        let localData = JSON.parse(localStorage.getItem("Table"));
 
         let Data = {
             id: Math.floor(Math.random() * 1000),
@@ -112,10 +130,10 @@ function Medicine(props) {
 
         if
             (localData === null) {
-            localStorage.setItem("medicine", JSON.stringify([Data]))
+            localStorage.setItem("Table", JSON.stringify([Data]))
         } else {
             localData.push(Data);
-            localStorage.setItem("medicine", JSON.stringify(localData))
+            localStorage.setItem("Table", JSON.stringify(localData))
         }
         loadData()
         setOpen(false);
@@ -201,4 +219,4 @@ function Medicine(props) {
     );
 }
 
-export default Medicine;
+export default Table;
