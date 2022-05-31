@@ -171,7 +171,6 @@ export default function Medicine() {
             <DataGrid
               rows={data}
               columns={columns}
-
               pageSize={5}
               rowsPerPageOptions={[5]}
               checkboxSelection
@@ -183,7 +182,6 @@ export default function Medicine() {
             <Formik value={formik}>
               <Form onSubmit={formik.handleSubmit}>
                 <DialogContent>
-
                   <TextField
                     margin="dense"
                     id="name"
