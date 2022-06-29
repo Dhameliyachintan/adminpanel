@@ -18,7 +18,7 @@ import CreateIcon from '@mui/icons-material/Create';
 export default function Medicine() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState([])
-  const [Update, setUpdate] = useState()
+  const [Update, setUpdate] = useState('')
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -45,13 +45,13 @@ export default function Medicine() {
   const formik = useFormik({
     initialValues: {
       name: '',
-      price:'',
-      quantity:'',
+      price: '',
+      quantity: '',
       expiry: ''
     },
     validationSchema: schema,
     onSubmit: (value, { resetForm }) => {
-      if(Update) {
+      if (Update) {
         handleupdate(value)
       } else {
         handleSubmitdata(value)
@@ -62,10 +62,10 @@ export default function Medicine() {
 
   const handleupdate = (value) => {
     let localdata = JSON.parse(localStorage.getItem("medicine"));
-    
+
     let udata = localdata.map((l, i) => {
-      if(l.id === value.id) {
-          return value;
+      if (l.id === value.id) {
+        return value;
       } else {
         return l;
       }
@@ -95,11 +95,28 @@ export default function Medicine() {
 
     setOpen(false);
     loadData()
-
+  
   }
+
+  const loadData = () => {
+    let localData = JSON.parse(localStorage.getItem("medicine"))
+
+    if (localData !== null) {
+      setData(localData)
+    }
+  }
+
+  useEffect(
+    () => {
+      loadData()
+    },
+    [])
+  
+ 
 
   const columns = [
 
+    { field: 'id', headerName: 'id', width: 130 },
     { field: 'name', headerName: 'Name', width: 130 },
     { field: 'price', headerName: ' Price', width: 130 },
     { field: 'quantity', headerName: 'Quantity', width: 130 },
@@ -134,27 +151,14 @@ export default function Medicine() {
   }
 
   const handleDelete = (id) => {
-    let localData = JSON.parse(localStorage.getItem("medicine"))
-
+    let localData = JSON.parse(localStorage.getItem('medicine'));
     let filterData = localData.filter((v, i) => v.id !== id);
-
-    localStorage.setItem("medicine", JSON.stringify(filterData));
+    localStorage.setItem("medicine", JSON.stringify(filterData))
     loadData()
+    console.log(id);
   }
 
-  const loadData = () => {
-    let localData = JSON.parse(localStorage.getItem("medicine"))
-
-    if (localData !== null) {
-      setData(localData)
-    }
-  }
-
-  useEffect(
-    () => {
-      loadData()
-    },
-    [])
+  
 
   return (
 
@@ -235,9 +239,9 @@ export default function Medicine() {
                     <Button onClick={handleClose}>Cancel</Button>
                     {
                       Update ?
-                      <Button type="submit">Update</Button>
-                       :
-                      <Button type="submit">Submit</Button>
+                        <Button type="submit">Update</Button>
+                        :
+                        <Button type="submit">Submit</Button>
                     }
                   </DialogActions>
                 </DialogContent>

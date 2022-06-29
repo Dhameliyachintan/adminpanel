@@ -8,21 +8,30 @@ import Blog from './container/Blog';
 import Contact from './container/Contact';
 import Medicine from './container/Medicine';
 import Table from './container/Table';
+import { Provider } from 'react-redux';
+import { configureStore } from './Redux/Store';
+import Counter from './container/Counter/Counter';
 
 function App() {
+
+ let store = configureStore()
+
   return (
-    <div className="App">
-      <MiniDrawer>
-        <Switch>
-        <Route exact to path={"/"} component={Home}/>
-        <Route exact to path={"/About"} component={About}/>
-        <Route exact to path={"/Blog"} component={Blog}/>
-        <Route exact to path={"/Contact"} component={Contact}/>
-        <Route exact to path={"/Medicine"} component={Medicine}/>
-        <Route exact to path={"/Table"} component={Table}/>
-        </Switch>
-      </MiniDrawer>
-    </div>
+    <>
+      <Provider store={store}>
+        <MiniDrawer>
+          <Switch>
+            <Route exact to path={"/"} component={Home} />
+            <Route exact to path={"/About"} component={About} />
+            <Route exact to path={"/Blog"} component={Blog} />
+            <Route exact to path={"/Contact"} component={Contact} />
+            <Route exact to path={"/Medicine"} component={Medicine} />
+            <Route exact to path={"/Table"} component={Table} />
+            <Route exact to path={"/Counter"} component={Counter} />
+          </Switch>
+        </MiniDrawer>
+      </Provider>
+    </>
   );
 }
 

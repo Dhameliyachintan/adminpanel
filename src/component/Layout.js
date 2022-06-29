@@ -113,7 +113,8 @@ export default function MiniDrawer({children}) {
     {label : 'Blog' , icon: <AppBlockingIcon/>, to: "/Blog" },
     {label : 'contact' , icon: <AddBoxIcon/>, to: "/contact" },
     {label : 'Medicine' , icon: <AddIcCallIcon/>, to: "/Medicine" },
-    {label : 'Table' , icon: <AddIcCallIcon/>, to: "/Table" }
+    {label : 'Table' , icon: <AddIcCallIcon/>, to: "/Table" },
+    {label : 'Counter' , icon: <AddIcCallIcon/>, to: "/Counter" }
   ]
 
   return (
