@@ -13,12 +13,15 @@ import { DataGrid } from '@mui/x-data-grid';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 export default function Medicine() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState([])
   const [Update, setUpdate] = useState('')
+
+  const count = useSelector(state => state.counter)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -95,7 +98,7 @@ export default function Medicine() {
 
     setOpen(false);
     loadData()
-  
+
   }
 
   const loadData = () => {
@@ -111,8 +114,8 @@ export default function Medicine() {
       loadData()
     },
     [])
-  
- 
+
+
 
   const columns = [
 
@@ -158,7 +161,7 @@ export default function Medicine() {
     console.log(id);
   }
 
-  
+
 
   return (
 
@@ -170,6 +173,7 @@ export default function Medicine() {
             <Button variant="outlined" onClick={() => handleClickOpen()}>
               Add Medicine
             </Button>
+            <p>{count.counter}</p>
           </center>
           <div style={{ height: 400, width: '100%' }}>
             <DataGrid
@@ -199,7 +203,6 @@ export default function Medicine() {
                     error={formik.errors.name ? true : false}
 
                   />
-
                   <TextField
                     margin="dense"
                     id="price"

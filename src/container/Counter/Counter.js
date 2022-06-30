@@ -7,17 +7,17 @@ function Counter(props) {
     const dispatch = useDispatch()
 
     const handleClickincrement = () =>{
-        dispatch(incrementcounter ())
+        dispatch(incrementcounter())
     }
 
     const handleClickdecrement = () =>{
-        dispatch(decrementcounter ())
+        dispatch(decrementcounter())
     }
     return (
         <div>
             <button onClick={() =>  handleClickincrement()}>+</button>
             <p>{count.counter}</p>
-            <button onClick={() =>  handleClickdecrement()}>+</button>
+            <button onClick={() =>  handleClickdecrement()}>-</button>
         </div>
     );
 }
