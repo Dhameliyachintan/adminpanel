@@ -2,15 +2,17 @@
 import './App.css';
 import MiniDrawer from './component/Layout';
 import Home from './container/Home';
-import { Switch, Route } from 'react-router-dom/cjs/react-router-dom.min';
+// import { Switch, Route } from 'react-router-dom/cjs/react-router-dom.min';
 import About from './container/About';
 import Blog from './container/Blog';
 import Contact from './container/Contact';
 import Medicine from './container/Medicine';
 import Table from './container/Table';
-import { Provider } from 'react-redux';
+  import { Provider } from 'react-redux';
 import { configureStore } from './Redux/Store';
 import Counter from './container/Counter/Counter';
+import { Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 function App() {
 

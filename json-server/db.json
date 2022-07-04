@@ -1,0 +1,44 @@
+{
+  "post": [
+    {
+      "id": 30,
+      "field": "adada",
+      "headerName": "price",
+      "width": 100,
+      "editable": false
+    },
+    {
+      "id": 31,
+      "field": "quntity",
+      "headerName": "quntity",
+      "type": "number",
+      "width": 150,
+      "editable": false
+    },
+    {
+      "id": 32,
+      "field": "expiry",
+      "headerName": "expiry",
+      "sortable": false,
+      "width": 160
+    }
+  ],
+  "comment": [
+    {
+      "id": 34,
+      "field": "action",
+      "headerName": "Action",
+      "sortable": false,
+      "width": 160
+    }
+  ],
+  "medicine": [
+    {
+      "id": 34,
+      "field": "action",
+      "headerName": "Action",
+      "sortable": false,
+      "width": 160
+    }
+  ]
+}
