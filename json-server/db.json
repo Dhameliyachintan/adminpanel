@@ -1,44 +1,44 @@
 {
-  "post": [
+  "Doctors": [
     {
-      "id": 30,
-      "field": "adada",
-      "headerName": "price",
-      "width": 100,
-      "editable": false
+      "id": 1,
+      "name": "jhho deo",
+      "experience": "1 year",
+      "sallery": 18000
     },
     {
-      "id": 31,
-      "field": "quntity",
-      "headerName": "quntity",
-      "type": "number",
-      "width": 150,
-      "editable": false
+      "id": 3,
+      "name": "vishal",
+      "experience": "3 year",
+      "sallery": 34000
     },
     {
-      "id": 32,
-      "field": "expiry",
-      "headerName": "expiry",
-      "sortable": false,
-      "width": 160
+      "id": 4,
+      "name": "jay",
+      "experience": "4 year",
+      "sallery": 45000
+    },
+    {
+      "id": 5,
+      "name": "mask",
+      "experience": "1.5 year",
+      "sallery": 21000
+    },
+    {
+      "id": 6,
+      "name": "vijay",
+      "experience": "4 year",
+      "sallery": 45000
     }
   ],
-  "comment": [
+  "comments": [
     {
-      "id": 34,
-      "field": "action",
-      "headerName": "Action",
-      "sortable": false,
-      "width": 160
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
     }
   ],
-  "medicine": [
-    {
-      "id": 34,
-      "field": "action",
-      "headerName": "Action",
-      "sortable": false,
-      "width": 160
-    }
-  ]
+  "profile": {
+    "name": "typicode"
+  }
 }

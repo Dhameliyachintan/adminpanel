@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { NavLink } from 'react-router-dom';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -21,7 +22,6 @@ import MailIcon from '@mui/icons-material/Mail';
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import AppBlockingIcon from '@mui/icons-material/AppBlocking';
-import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import AddIcCallIcon from '@mui/icons-material/AddIcCall';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';

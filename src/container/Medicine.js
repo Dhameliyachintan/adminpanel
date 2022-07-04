@@ -14,7 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
 import { useDispatch, useSelector } from 'react-redux';
-import { Medicines } from '../Redux/Action/medicine.action';
+import { Medicinedata } from '../Redux/Action/medicine.action';
 
 
 
@@ -115,7 +115,7 @@ export default function Medicine() {
   useEffect(
     () => {
       loadData()
-      dispatch(Medicines())
+      dispatch(Medicinedata())
     },
     [])
 

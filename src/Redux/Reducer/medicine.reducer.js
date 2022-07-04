@@ -1,25 +1,30 @@
 import * as ActionType from "../ActionType"
 
 
-const initialState = {
-    isLoading: false,
+export const initalstate ={
+
+    isLoading : false,
     medicine : [],
-    error: ''
+    error : ""
 }
 
-export const medicinereducer = (state = initialState, action) => {
-    console.log(action.type, action.payload);
-    
+
+
+export const medicineReducer = (state=initalstate , action) =>{
+
+    console.log(action.type , action.payload);
+
     switch (action.type) {
-        case ActionType.GET_MEDICINES:
+        case ActionType.GET_MEDICINE : 
             return {
                 ...state,
-                isLoading: false,
+                isLoaing : false,
                 medicine: action.payload,
-                error: ''
+                error: ""
             }
+            default :
+              return state
 
-        default:
-            return state
     }
+
 }
